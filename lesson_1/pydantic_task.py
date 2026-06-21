@@ -1,12 +1,12 @@
-from pydantic import BaseModel, EmailStr, ValidationError
-import json
 
+from pydantic import ValidationError
+
+from pydantic import BaseModel, EmailStr
 
 class Address(BaseModel):
     city: str
     street: str
     house_number: str
-
 
 class User(BaseModel):
     name: str
@@ -14,10 +14,9 @@ class User(BaseModel):
     email: EmailStr
     address: Address
 
-
 json_string = """{
     "name": "John Doe",
-    "age": "22",
+    "age": 22,
     "email": "john.doe@example.com",
     "address": {
         "city": "New York",
@@ -25,12 +24,18 @@ json_string = """{
         "house_number": "123"
     }
 }"""
-
 try:
     user1 = User.model_validate_json(json_string)
     print(user1)
-    with open('user1.json', 'w') as outfile:
-        outfile.write(user1.model_dump_json())
+except ValidationError as err:
+    print(err)
 
-except ValidationError as e:
-    print(e)
+# user_data = {
+#     "name": "John",
+#     "age": 18
+# }
+
+# user1 = User(**user_data)
+# user1 = User ("name" ="john", "age" = 18)
+# print(user1)
+
