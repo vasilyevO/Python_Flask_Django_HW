@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, String,ForeignKey, Table, MetaData
+from sqlalchemy import create_engine, String,ForeignKey, MetaData
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, Mapped, mapped_column, relationship
 from decimal import Decimal
 
